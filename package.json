@@ -1,0 +1,36 @@
+{
+  "name": "better-tree-tools",
+  "private": false,
+  "version": "0.0.1-beta.1",
+  "description": "一个简单的工具集",
+  "main": "dist/better-tree-tools.min.js",
+  "scripts": {
+    "test": "node ./src/test.js",
+    "build": "gulp version"
+  },
+  "homepage": "https://github.com/zwbBlog/better-tree-tools",
+  "keywords": [
+    "better-tree-tools",
+    "better-tree",
+    "better-tools",
+    "tree-tools",
+    "tools",
+    "tool",
+    "tree",
+    "trees"
+  ],
+  "author": "zlgb",
+  "email": "zlgbmail@163.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.8",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "7",
+    "gulp-deleted": "^1.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2"
+  },
+  "dependencies": {}
+}

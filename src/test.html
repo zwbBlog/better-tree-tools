@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/dataJson.js"></script>
+    <script src="better-tree-tools.js"></script>
+    <style>
+        .t {
+            height: 5000px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="t">
+        <button class="throttleFn">throttleFn</button>
+        <button class="debounceFn">debounceFn</button>
+        <button class="copyTextToClipboard">copyTextToClipboard</button>
+    </div>
+</body>
+<script>
+    try {
+        const _ = new BetterTreeTools({ id: 'id', pId: 'pId' });
+        const tree = _.listToTree(list)
+        console.log(tree)
+        // const listData = _.treeToList(JSON.parse(JSON.stringify(tree)))
+        // console.log(listData)
+        // console.log(_.listToTree(JSON.parse(JSON.stringify(listData))))
+        // console.log(_.getNode(listData, '1-1'))
+        // console.log(_.getNodeList(tree, { id: '1-1', pId: '1-1' }))
+        // console.log(_.removeNode(_.listToTree(JSON.parse(JSON.stringify(listData))), { id: '1' }))
+
+        // console.log(_.insert(_.listToTree(JSON.parse(JSON.stringify(listData))), { id: '666', title: '新加的' }, '1-1'))
+    } catch (err) {
+        console.warn(err);
+    }
+</script>
+
+</html>
