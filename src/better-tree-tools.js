@@ -52,6 +52,24 @@
             });
             return result;
         },
+        listFastToTree(data) {
+            const { id, pId, children } = this.config
+            const result = []
+            const map = {}
+            for (const item of data) {
+                const sId = item[id]
+                const sPid = item[pId]
+                if (!map[sId]) map[sId] = { [children]: [] }
+                map[sId] = Object.assign(item, { [children]: map[sId][children] })
+                if (!sPid || sPid == '0') {
+                    result.push(map[sId])
+                } else {
+                    if (!map[sPid]) map[sPid] = { [children]: [] }
+                    map[sPid][children].push(map[sId])
+                }
+            }
+            return result;
+        },
         treeToList(tree) {
             const data = [];
             const { children } = this.config

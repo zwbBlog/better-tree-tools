@@ -27,8 +27,8 @@
 </body>
 <script>
     try {
-        const _ = new BetterTreeTools({ id: 'id', pId: 'pId' });
-        const tree = _.listToTree(list)
+        const _ = new BetterTreeTools({ id: 'id', pId: 'pId',children:'c' });
+        const tree = _.listFastToTree(list)
         console.log(tree)
         // const listData = _.treeToList(JSON.parse(JSON.stringify(tree)))
         // console.log(listData)

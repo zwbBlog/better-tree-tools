@@ -100,7 +100,7 @@ console.log(tree)
 ##### 方法集合如下：
 ```
 * list转为树
-  listToTree(list)
+  listToTree(list) or listFastToTree(list)
 * 树转为list
   treeToList(tree)  
 * 根据id在data中查找值
