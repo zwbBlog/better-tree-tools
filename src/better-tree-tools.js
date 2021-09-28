@@ -94,40 +94,28 @@
             return data;
         },
         getNode(data = [], idValue) {
-            const { id, children } = this.config
-            const recursion = (d) => {
-                for (let i = 0, len = d.length; i < len; i++) {
-                    const c = d[i]
-                    if (c[id] === idValue) {
-                        return c
-                    }
-                    if (this.typeIs(c[children]) === 'array') {
-                        delete c[children]
-                        recursion(c[children])
-                    }
+            const { id } = this.config
+            const d = this.treeToList(data)
+            for (let i = 0, len = d.length; i < len; i++) {
+                const c = d[i]
+                if (c[id] === idValue) {
+                    return c
                 }
             }
-            return recursion(data)
+            return null
         },
         getNodeList(data = [], opts = {}) {
-            const { id, pId, children } = this.config
+            const { id, pId } = this.config
             const idValue = opts[id]
             const pIdValue = opts[pId]
             const temp = []
-            const recursion = (d) => {
-                for (let i = 0, len = d.length; i < len; i++) {
-                    const c = d[i]
-                    if (c[id] === idValue || c[pId] === pIdValue) {
-                        temp.push(c)
-                    }
-                    if (this.typeIs(c[children]) === 'array') {
-                        const child = JSON.parse(JSON.stringify(c[children]))
-                        delete c[children]
-                        recursion(child)
-                    }
+            const d = this.treeToList(data)
+            for (let i = 0, len = d.length; i < len; i++) {
+                const c = d[i]
+                if (c[id] === idValue || c[pId] === pIdValue) {
+                    temp.push(c)
                 }
             }
-            recursion(data)
             return temp;
         },
         removeNode(data = [], opts = {}) {
