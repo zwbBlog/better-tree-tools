@@ -114,9 +114,10 @@ console.log(tree)
 * 插入到指定的id值中作为子集
   newItem = {
     id: '666', 
+    pId: '2',
     title: '新加的' 
   }
-  insert(data, newItem, id)    
+  insert(data, newItem)    
 ```
 ## 程序更新日志 ##
 
