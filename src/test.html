@@ -27,17 +27,17 @@
 </body>
 <script>
     try {
-        const _ = new BetterTreeTools({ id: 'id', pId: 'pId',children:'c' });
-        const tree = _.listFastToTree(list)
+        const TreeTools = new BetterTreeTools({ id: 'id', pId: 'pId',children:'c' });
+        const tree = TreeTools.listFastToTree(list)
         console.log(tree)
-        // const listData = _.treeToList(JSON.parse(JSON.stringify(tree)))
-        // console.log(listData)
-        // console.log(_.listToTree(JSON.parse(JSON.stringify(listData))))
-        // console.log(_.getNode(listData, '1-1'))
-        // console.log(_.getNodeList(tree, { id: '1-1', pId: '1-1' }))
-        // console.log(_.removeNode(_.listToTree(JSON.parse(JSON.stringify(listData))), { id: '1' }))
-
-        // console.log(_.insert(_.listToTree(JSON.parse(JSON.stringify(listData))), { id: '666', title: '新加的' }, '1-1'))
+        console.log(TreeTools.getNode(list,'2'))
+        console.log(list)
+        console.log(TreeTools.getNodeList(list,{id:'2',pId:'2'}))
+        console.log(list)
+        console.log(TreeTools.insert(list,{id:'999',pId:'2'}))
+        console.log(list)
+        console.log(TreeTools.removeNode(list,{id:'999'}))
+        console.log(list)
     } catch (err) {
         console.warn(err);
     }

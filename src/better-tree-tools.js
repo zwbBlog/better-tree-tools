@@ -24,10 +24,37 @@
             children: 'children'
         }, config);
     };
-
     BetterTreeTools.prototype = {
         typeIs(instance) {
             return Object.prototype.toString.call(instance).slice(8, -1).toLowerCase();
+        },
+        // 深克隆
+        deepCopy(obj) {
+            const clone = this.typeIs(obj) === 'array' ? [] : {};
+            const types = ['array', 'object'];
+            if (!types.includes(this.typeIs(obj) )){
+                return obj
+            }
+            const copy = objClone => {
+                for (var k in objClone) {
+                    // 只拷贝实例属性
+                    if (objClone.hasOwnProperty(k)) {
+                        if (typeof objClone[k] === 'object') {
+                            // 引用类型,数组和对象
+                            if (types.includes(this.typeIs(objClone[k]))) {
+                                clone[k] = this.deepCopy(objClone[k])
+                            }  else {
+                                clone[k] = objClone[k]
+                            }
+                        } else {
+                            // 值类型
+                            clone[k] = objClone[k];
+                        }
+                    }
+                }
+            }
+            copy(obj)
+            return clone;
         },
         listToTree(data) {
             const { id, pId, children } = this.config
@@ -70,22 +97,28 @@
             }
             return result;
         },
-        treeToList(tree) {
+        treeToList(origin) {
             const data = [];
-            const { children } = this.config
-            const recursion = (t) => {
+            const { children, id } = this.config
+            const tree = this.deepCopy(origin)
+            const filterAddData = c => {
+                if (data.filter(d => d[id] === c[id]).length === 0) {
+                    data.push(c) 
+                }
+            }
+            const recursion = t => {
                 if (this.typeIs(t) !== 'array') {
-                    data.push(t)
+                    filterAddData(t)
                 } else {
                     for (let i = 0, len = t.length; i < len; i++) {
                         const c = t[i]
-                        const child = JSON.parse(JSON.stringify(c[children] || '[]'))
-                        if (this.typeIs(c[children]) === 'array') {
+                        if (c[children] && this.typeIs(c[children]) === 'array') {
+                            const child = this.deepCopy(c[children])
                             delete c[children]
-                            data.push(c)
+                            filterAddData(c)
                             recursion(child)
                         } else {
-                            data.push(c)
+                            filterAddData(c)
                         }
                     }
                 }
@@ -93,7 +126,8 @@
             recursion(tree);
             return data;
         },
-        getNode(data = [], idValue) {
+        getNode(origin = [], idValue) {
+            const data = this.deepCopy(origin)
             const { id } = this.config
             const d = this.treeToList(data)
             for (let i = 0, len = d.length; i < len; i++) {
@@ -104,7 +138,8 @@
             }
             return null
         },
-        getNodeList(data = [], opts = {}) {
+        getNodeList(origin = [], opts = {}) {
+            const data = this.deepCopy(origin)
             const { id, pId } = this.config
             const idValue = opts[id]
             const pIdValue = opts[pId]
@@ -134,12 +169,12 @@
             }
             return this.listToTree(list)
         },
-        insert(data, newItem, id) {
+        insert(data, newItem) {
             const list = this.treeToList(data)
             for (let i = 0, len = list.length; i < len; i++) {
                 list[i].sort = i
             }
-            const cur = this.getNode(list, id)
+            const cur = this.getNode(list, newItem.pId)
             if (cur) {
                 newItem.pId = cur.id
                 newItem.sort = cur.sort - 1

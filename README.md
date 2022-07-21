@@ -118,3 +118,7 @@ console.log(tree)
   }
   insert(data, newItem, id)    
 ```
+## 程序更新日志 ##
+
+> ### 0.0.1-beta.5 更新时间：2022-7-21 ###
+1. treeToList、getNode、getNodeList、removeNode、insert方法内部修改，采用深度克隆模式，保持传入原始值不变
