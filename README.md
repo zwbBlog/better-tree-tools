@@ -125,3 +125,5 @@ console.log(tree)
 1. treeToList、getNode、getNodeList、removeNode、insert方法内部修改，采用深度克隆模式，保持传入原始值不变
 > ### 0.0.1-beta.6 更新时间：2023-10-12 ###
 1. 修复listFastToTree方法中，节点pId为null，id为'0'没有被作为父节点
+> ### 0.0.1-beta.7 更新时间：2023-10-12 ###
+1. 优化listFastToTree方法

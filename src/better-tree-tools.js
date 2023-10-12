@@ -81,21 +81,37 @@
         },
         listFastToTree(data) {
             const { id, pId, children } = this.config
-            const result = []
             const map = {}
+            const uniqueKey = '_$null';
             for (const item of data) {
                 const sId = item[id]
-                const sPid = item[pId]
+                let sPid = item[pId]
                 if (!map[sId]) map[sId] = { [children]: [] }
                 map[sId] = Object.assign(item, { [children]: map[sId][children] })
                 if (!sPid) {
-                    result.push(map[sId])
-                } else {
-                    if (!map[sPid]) map[sPid] = { [children]: [] }
-                    map[sPid][children].push(map[sId])
+                    sPid = uniqueKey
+                }
+                if (!map[sPid]) map[sPid] = { [children]: [] }
+                map[sPid][children].push(map[sId])
+            }
+            const m1 = map[uniqueKey], m2 = map["0"];
+            if (m1 && m2) {
+                if (m1[id] && !m2[id]) {
+                    return m2[children]
+                }
+                if (m2[id] && !m1[id]) {
+                    return m1[children]
+                }
+                if (!m1[id] && !m2[id]) {
+                    return [...m1[children], ...m2[children]]
                 }
             }
-            return result;
+            if (m1) {
+                return m1[children]
+            }
+            if (m2) {
+                return m2[children]
+            }
         },
         treeToList(origin) {
             const data = [];

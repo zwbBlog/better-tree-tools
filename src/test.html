@@ -28,16 +28,22 @@
 <script>
     try {
         const TreeTools = new BetterTreeTools({ id: 'id', pId: 'pId',children:'c' });
-        const tree = TreeTools.listFastToTree(list)
-        console.log(tree)
-        console.log(TreeTools.getNode(list,'2'))
-        console.log(list)
-        console.log(TreeTools.getNodeList(list,{id:'1',pId:'0'}))
-        console.log(list)
-        console.log(TreeTools.insert(list,{id:'999',pId:'1'}))
-        console.log(list)
+        const tree1 = TreeTools.listFastToTree(list1)
+        const tree11 = TreeTools.listFastToTree(list2)
+        const tree2 = TreeTools.listToTree(list1)
+        const tree22 = TreeTools.listToTree(list2)
+        console.log(tree1)
+        console.log(tree11)
+        console.log(tree2)
+        console.log(tree22)
+        // console.log(TreeTools.getNode(list,'2'))
+        // console.log(list)
+        // console.log(TreeTools.getNodeList(list,{id:'1',pId:'0'}))
+        // console.log(list)
+        // console.log(TreeTools.insert(list,{id:'999',pId:'1'}))
+        // console.log(list)
         // console.log(TreeTools.removeNode(list,{id:'999'}))
-        console.log(list)
+        // console.log(list)
     } catch (err) {
         console.warn(err);
     }
