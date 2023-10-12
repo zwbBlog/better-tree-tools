@@ -1,29 +1,29 @@
-# better-util-tools
+# better-tree-tools
 ## 一个好用的树方法合集
 ### *使用方法*
 - *npm i better-tree-tools*
 - *or*
 - *yarn add better-tree-tools*
 #### way1：
-```
+``` js
 import BetterTreeTools from "better-tree-tools"
 or
 const BetterTreeTools = require('better-tree-tools')
 ```
 #### way2：
-```
+``` js
 <script src="xxx/xxx/better-tree-tools.js"></script>
 or
 <script src="xxx/xxx/better-tree-tools.min.js"></script>
 ```
 - 具体使用
-```
+``` js
 const config = {
   id:'id',  //id标识
   pId:'pId', //pId标识
   children:'children' //children标识
 }
-const _ = new BetterTreeTools(config)
+const TreeTools = new BetterTreeTools(config)
 const list = [
   {
     id: '1',
@@ -56,7 +56,7 @@ const list = [
     pId: '2'
   }
 ]
-const tree = _.listToTree(list)
+const tree = TreeTools.listToTree(list)
 console.log(tree)
 [
     {
@@ -96,9 +96,9 @@ console.log(tree)
         ]
     }
 ]
-```
+``` 
 ##### 方法集合如下：
-```
+``` js
 * list转为树
   listToTree(list) or listFastToTree(list)
 * 树转为list
@@ -123,3 +123,5 @@ console.log(tree)
 
 > ### 0.0.1-beta.5 更新时间：2022-7-21 ###
 1. treeToList、getNode、getNodeList、removeNode、insert方法内部修改，采用深度克隆模式，保持传入原始值不变
+> ### 0.0.1-beta.6 更新时间：2023-10-12 ###
+1. 修复listFastToTree方法中，节点pId为null，id为'0'没有被作为父节点

@@ -32,7 +32,7 @@
         deepCopy(obj) {
             const clone = this.typeIs(obj) === 'array' ? [] : {};
             const types = ['array', 'object'];
-            if (!types.includes(this.typeIs(obj) )){
+            if (!types.includes(this.typeIs(obj))) {
                 return obj
             }
             const copy = objClone => {
@@ -43,7 +43,7 @@
                             // 引用类型,数组和对象
                             if (types.includes(this.typeIs(objClone[k]))) {
                                 clone[k] = this.deepCopy(objClone[k])
-                            }  else {
+                            } else {
                                 clone[k] = objClone[k]
                             }
                         } else {
@@ -88,7 +88,7 @@
                 const sPid = item[pId]
                 if (!map[sId]) map[sId] = { [children]: [] }
                 map[sId] = Object.assign(item, { [children]: map[sId][children] })
-                if (!sPid || sPid == '0') {
+                if (!sPid) {
                     result.push(map[sId])
                 } else {
                     if (!map[sPid]) map[sPid] = { [children]: [] }
@@ -103,7 +103,7 @@
             const tree = this.deepCopy(origin)
             const filterAddData = c => {
                 if (data.filter(d => d[id] === c[id]).length === 0) {
-                    data.push(c) 
+                    data.push(c)
                 }
             }
             const recursion = t => {
