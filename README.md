@@ -100,7 +100,7 @@ console.log(tree)
 ##### 方法集合如下：
 ``` js
 * list转为树
-  listToTree(list) or listFastToTree(list)
+  listToTree(list)
 * 树转为list
   treeToList(tree)  
 * 根据id在data中查找值
@@ -112,11 +112,11 @@ console.log(tree)
   }
   getNodeList(data = [], opts)   
 * 插入到指定的id值中作为子集
-  newItem = {
+  newItem = [{
     id: '666', 
     pId: '2',
     title: '新加的' 
-  }
+  }]
   insert(data, newItem)    
 ```
 ## 程序更新日志 ##
@@ -127,3 +127,5 @@ console.log(tree)
 1. 修复listFastToTree方法中，节点pId为null，id为'0'没有被作为父节点
 > ### 0.0.1-beta.7 更新时间：2023-10-12 ###
 1. 优化listFastToTree方法
+> ### 0.0.1-beta.8 更新时间：2023-10-13 ###
+1. 去除listFastToTree方法，优化insert方法,传入参数为数组

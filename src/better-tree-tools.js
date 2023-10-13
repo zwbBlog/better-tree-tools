@@ -79,40 +79,6 @@
             });
             return result;
         },
-        listFastToTree(data) {
-            const { id, pId, children } = this.config
-            const map = {}
-            const uniqueKey = '_$null';
-            for (const item of data) {
-                const sId = item[id]
-                let sPid = item[pId]
-                if (!map[sId]) map[sId] = { [children]: [] }
-                map[sId] = Object.assign(item, { [children]: map[sId][children] })
-                if (!sPid) {
-                    sPid = uniqueKey
-                }
-                if (!map[sPid]) map[sPid] = { [children]: [] }
-                map[sPid][children].push(map[sId])
-            }
-            const m1 = map[uniqueKey], m2 = map["0"];
-            if (m1 && m2) {
-                if (m1[id] && !m2[id]) {
-                    return m2[children]
-                }
-                if (m2[id] && !m1[id]) {
-                    return m1[children]
-                }
-                if (!m1[id] && !m2[id]) {
-                    return [...m1[children], ...m2[children]]
-                }
-            }
-            if (m1) {
-                return m1[children]
-            }
-            if (m2) {
-                return m2[children]
-            }
-        },
         treeToList(origin) {
             const data = [];
             const { children, id } = this.config
@@ -187,17 +153,8 @@
         },
         insert(data, newItem) {
             const list = this.treeToList(data)
-            for (let i = 0, len = list.length; i < len; i++) {
-                list[i].sort = i
-            }
-            const cur = this.getNode(list, newItem.pId)
-            if (cur) {
-                newItem.pId = cur.id
-                newItem.sort = cur.sort - 1
-            }
-            list.push(newItem)
-            const tree = this.listToTree(list)
-            return this.sort(tree)
+            list.push(...newItem)
+            return this.listToTree(list)
         },
         sort(tree) {
             const { children } = this.config
